@@ -12,15 +12,15 @@ def apply_threshold(img, threshold=128, wp_val=255):
     """Obtain a binary image based on a given global threshold or
     a set of local thresholds.
     
-    :param img: The input image.
-    :type img: numpy.ndarray
-    :param threshold: The global or local thresholds corresponding 
+    @param img: The input image.
+    @type img: ndarray
+    @param threshold: The global or local thresholds corresponding 
         to each pixel of the image.
-    :type threshold: Union[int, numpy.ndarray]
-    :param wp_val: The value assigned to foreground pixels (white pixels).
-    :type: int
+    @type threshold: Union[int, ndarray]
+    @param wp_val: The value assigned to foreground pixels (white pixels).
+    @type: int
     
-    :return: A binary image.
-    :rtype: numpy.ndarray
+    @return: A binary image.
+    @rtype: ndarray
     """
     return ((img >= threshold) * wp_val).astype(np.uint8)

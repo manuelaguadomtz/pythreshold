@@ -13,7 +13,7 @@ def p_tile_threshold(image, pct):
     Reference:
     
     @param image: The input image
-    @type image: numpy.ndarray
+    @type image: ndarray
     @param pct: The percent of desired background pixels (black pixels).
         It must lie in the interval [0, 1]
     @type pct: float

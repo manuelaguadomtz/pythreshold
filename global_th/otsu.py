@@ -16,9 +16,9 @@ def otsu_threshold(image=None, hist=None):
     9.1 (1979): 62-66.
 
     @param image: The input image
-    @type image: numpy.ndarray
+    @type image: ndarray
     @param hist: The input image histogram
-    @type hist: numpy.ndarray
+    @type hist: ndarray
 
     @return: The Otsu threshold
     @rtype int
