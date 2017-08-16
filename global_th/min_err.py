@@ -26,32 +26,35 @@ def min_err_threshold(image):
 
     # The number of background pixels for each threshold
     w_backg = hist.cumsum()
+    w_backg[w_backg == 0] = 1  # to avoid divisions by zero
 
     # The number of foreground pixels for each threshold
     w_foreg = w_backg[-1] - w_backg
+    w_foreg[w_foreg == 0] = 1  # to avoid divisions by zero
 
     # Cumulative distribution function
     cdf = np.cumsum(hist * np.arange(len(hist)))
 
-    # Means
-    b_mean = cdf * (w_backg != 0) / (w_backg + (w_backg == 0))
-    w_mean = (cdf[-1] - cdf) * (w_foreg != 0) / (w_foreg + (w_foreg == 0))
+    # Means (Last term is to avoid divisions by zero)
+    b_mean = cdf / (w_backg + (w_backg == 0))
+    f_mean = (cdf[-1] - cdf) / (w_foreg + (w_foreg == 0))
+
+    # Standard deviations
+    b_std = ((np.arange(len(hist)) - b_mean)**2 * hist).cumsum() / w_backg
+    f_std = ((np.arange(len(hist)) - f_mean) ** 2 * hist).cumsum()
+    f_std = (f_std[-1] - f_std) / (w_foreg + (w_foreg == 0))
 
     threshold = 0
     min_error = -1
 
     for t in xrange(1, len(hist)):
         if w_backg[t] != 0 and w_foreg[t] != 0:
-            # TODO Compute these values outside the for loop
-            black_std = (np.arange(t+1) - b_mean[t])**2 * hist[:t+1]
-            black_std = black_std.sum() / w_backg[t]
-            white_std = ((np.arange(t+1, len(hist)) - w_mean[t])**2 *
-                         hist[t+1:len(hist)])
-            white_std = white_std.sum() / w_foreg[t]
+            backg_std = b_std[t]
+            foreg_std = f_std[t]
 
-            if white_std != 0 and black_std != 0:
-                error = 1 + 2 * (w_backg[t] * np.log(black_std) + w_foreg[t] *
-                                 np.log(white_std)) - 2 * (w_backg[t] *
+            if foreg_std != 0 and backg_std != 0:
+                error = 1 + 2 * (w_backg[t] * np.log(backg_std) + w_foreg[t] *
+                                 np.log(foreg_std)) - 2 * (w_backg[t] *
                                                            np.log(w_backg[t])
                                                            + w_foreg[t] *
                                                            np.log(w_foreg[t]))
