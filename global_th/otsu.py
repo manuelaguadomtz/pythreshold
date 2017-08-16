@@ -15,14 +15,13 @@ def otsu_threshold(image=None, hist=None):
     histograms." IEEE transactions on systems, man, and cybernetics
     9.1 (1979): 62-66.
 
-    Keyword Arguments:
-    @:param image: The input image
-    @:type image: numpy.ndarray
-    @:param hist: The input image histogram
-    @:type hist: numpy.ndarray
+    @param image: The input image
+    @type image: numpy.ndarray
+    @param hist: The input image histogram
+    @type hist: numpy.ndarray
     
-    @:return The Otsu threshold
-    @:rtype int
+    @return: The Otsu threshold
+    @rtype int
     """
     if image is None and hist is None:
         raise ValueError('You must pass as a parameter either'
