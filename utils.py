@@ -17,6 +17,7 @@ def apply_threshold(img, threshold=128, wp_val=255):
         to each pixel of the image.
     :type threshold: Union[int, numpy.ndarray]
     :param wp_val: The value assigned to foreground pixels (white pixels).
+    :type: int
     
     :return: A binary image.
     :rtype: numpy.ndarray
