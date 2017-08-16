@@ -3,3 +3,6 @@
 
 # Ignoring python bytecode files
 *.pyc
+
+# Ignoring test script file
+test.py
