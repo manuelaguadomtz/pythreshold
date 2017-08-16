@@ -36,8 +36,8 @@ def min_err_threshold(image):
     cdf = np.cumsum(hist * np.arange(len(hist)))
 
     # Means (Last term is to avoid divisions by zero)
-    b_mean = cdf / (w_backg + (w_backg == 0))
-    f_mean = (cdf[-1] - cdf) / (w_foreg + (w_foreg == 0))
+    b_mean = cdf / w_backg
+    f_mean = (cdf[-1] - cdf) / w_foreg
 
     # Standard deviations
     b_std = ((np.arange(len(hist)) - b_mean)**2 * hist).cumsum() / w_backg
