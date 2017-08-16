@@ -34,12 +34,12 @@ def otsu_threshold(image=None, hist=None):
     cdf_backg = np.cumsum(np.arange(len(hist)) * hist)
     w_backg = np.cumsum(hist)  # The number of background pixels
     w_backg[w_backg == 0] = 1  # To avoid divisions by zero
-    m_backg = cdf_backg / w_backg
+    m_backg = cdf_backg / w_backg  # The means
 
     cdf_foreg = cdf_backg[-1] - cdf_backg
     w_foreg = w_backg[-1] - w_backg  # The number of foreground pixels
     w_foreg[w_foreg == 0] = 1  # To avoid divisions by zero
-    m_foreg = cdf_foreg / w_foreg
+    m_foreg = cdf_foreg / w_foreg  # The means
 
     var_between_classes = w_backg * w_foreg * (m_backg - m_foreg) ** 2
 
