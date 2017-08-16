@@ -1,0 +1,5 @@
+# Ignoring pycharm idea folder
+.idea/
+
+# Ignoring python bytecode files
+*.pyc
