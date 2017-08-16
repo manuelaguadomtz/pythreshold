@@ -9,7 +9,7 @@ __author__ = u'Lic. Manuel Aguado Martínez'
 
 def otsu_threshold(image=None, hist=None):
     """ Runs the Otsu threshold algorithm.
-    
+
     Reference:
     Otsu, Nobuyuki. "A threshold selection method from gray-level
     histograms." IEEE transactions on systems, man, and cybernetics
@@ -19,7 +19,7 @@ def otsu_threshold(image=None, hist=None):
     @type image: numpy.ndarray
     @param hist: The input image histogram
     @type hist: numpy.ndarray
-    
+
     @return: The Otsu threshold
     @rtype int
     """
@@ -27,40 +27,20 @@ def otsu_threshold(image=None, hist=None):
         raise ValueError('You must pass as a parameter either'
                          'the input image or its histogram')
 
+    # Calculating histogram
     if not hist:
-        hist = np.histogram(image, bins=256)[0]
+        hist = np.histogram(image, bins=256)[0].astype(np.float)
 
-    n_pixels = image.shape[0] * image.shape[1]
+    cdf_backg = np.cumsum(np.arange(len(hist)) * hist)
+    w_backg = np.cumsum(hist)  # The number of background pixels
+    w_backg[w_backg == 0] = 1  # To avoid divisions by zero
+    m_backg = cdf_backg / w_backg
 
-    sum_a = np.sum(np.arange(len(hist)) * hist)
-    sum_b = 0
+    cdf_foreg = cdf_backg[-1] - cdf_backg
+    w_foreg = w_backg[-1] - w_backg  # The number of foreground pixels
+    w_foreg[w_foreg == 0] = 1  # To avoid divisions by zero
+    m_foreg = cdf_foreg / w_foreg
 
-    weight_background = 0
-    max_variance = 0
+    var_between_classes = w_backg * w_foreg * (m_backg - m_foreg) ** 2
 
-    threshold = 0
-
-    for t in xrange(len(hist)):
-        weight_background += hist[t]
-        if weight_background == 0:
-            continue
-
-        weight_foreground = n_pixels - weight_background
-        if weight_foreground == 0:
-            break
-
-        sum_b += t * hist[t]
-
-        # calulating the means
-        mean_background = float(sum_b) / float(weight_background)
-        mean_foreground = float(sum_a - sum_b) / float(weight_foreground)
-
-        # calculating between class variance
-        between_variance = weight_background * weight_foreground * \
-            (mean_background - mean_foreground)**2
-
-        if between_variance > max_variance:
-            max_variance = between_variance
-            threshold = t
-
-    return threshold
+    return np.argmax(var_between_classes)
