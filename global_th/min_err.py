@@ -22,7 +22,7 @@ def min_err_threshold(image):
     @rtype: int
     """
     # Input image histogram
-    hist = np.histogram(image, bins=256)[0]
+    hist = np.histogram(image, bins=256)[0].astype(np.float)
 
     # The number of background pixels for each threshold
     w_backg = hist.cumsum()
@@ -44,22 +44,13 @@ def min_err_threshold(image):
     f_std = ((np.arange(len(hist)) - f_mean) ** 2 * hist).cumsum()
     f_std = (f_std[-1] - f_std) / (w_foreg + (w_foreg == 0))
 
-    threshold = 0
-    min_error = -1
+    # To avoid log of 0 invalid calculations
+    b_std[b_std == 0] = 1
+    f_std[f_std == 0] = 1
 
-    for t in xrange(1, len(hist)):
-        if w_backg[t] != 0 and w_foreg[t] != 0:
-            backg_std = b_std[t]
-            foreg_std = f_std[t]
+    # Estimating error
+    error_a = w_backg * np.log(b_std) + w_foreg * np.log(f_std)
+    error_b = w_backg * np.log(w_backg) + w_foreg * np.log(w_foreg)
+    error = 1 + 2 * error_a - 2 * error_b
 
-            if foreg_std != 0 and backg_std != 0:
-                error = 1 + 2 * (w_backg[t] * np.log(backg_std) + w_foreg[t] *
-                                 np.log(foreg_std)) - 2 * (w_backg[t] *
-                                                           np.log(w_backg[t])
-                                                           + w_foreg[t] *
-                                                           np.log(w_foreg[t]))
-                if min_error == -1 or min_error > error:
-                    min_error = error
-                    threshold = t
-
-    return threshold
+    return np.argmin(error)
