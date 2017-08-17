@@ -15,6 +15,9 @@ def otsu_threshold(image=None, hist=None):
     histograms." IEEE transactions on systems, man, and cybernetics
     9.1 (1979): 62-66.
 
+    Dong,L.,G.Yu P. Ogunbona,and W. Li ‘‘An Efﬁcient Iterative Algorithm
+    for Image Thresholding,’’ Pattern Recognition Letters 29 (2008): 1311–1316
+
     @param image: The input image
     @type image: ndarray
     @param hist: The input image histogram
