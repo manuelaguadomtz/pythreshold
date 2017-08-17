@@ -3,23 +3,8 @@
 
 import numpy as np
 
-__copyright__ = 'Copyright 2014'
+__copyright__ = 'Copyright 2017'
 __author__ = u'Lic. Manuel Aguado Martínez'
-
-
-def __compute_entropy(histogram):
-    """Compute the entropy cdf of a histogram
-    """
-    cdf = np.zeros(histogram.shape, dtype=np.float64)
-
-    if histogram[0] > 0:
-        cdf[0] = - histogram[0] * np.log(histogram[0])
-    for i in xrange(1, len(histogram)):
-        if histogram[i] > 0:
-            cdf[i] = - histogram[i] * np.log(histogram[i])
-        cdf[i] += cdf[i - 1]
-
-    return cdf
 
 
 def pun_threshold(image):
@@ -29,11 +14,14 @@ def pun_threshold(image):
     Pun, T. ‘‘A New Method for Grey-Level Picture Thresholding Using the
     Entropy of the Histogram,’’ Signal Processing 2, no. 3 (1980): 223–237.
 
-    Keyword Arguments:
-    image -- The input image
+    @param image: The input image
+    @type image: ndarray
+    
+    @return: The estimated threshold
+    @rtype: int
     """
     histogram = np.histogram(image, bins=256, normed=True)[0]
-    entropy_cdf = __compute_entropy(histogram)
+    entropy_cdf = np.cumsum(histogram * np.log(histogram + (histogram == 0)))
     cdf = np.cumsum(histogram)
 
     max_entropy = 0
