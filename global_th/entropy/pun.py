@@ -20,22 +20,32 @@ def pun_threshold(image):
     @return: The estimated threshold
     @rtype: int
     """
-    histogram = np.histogram(image, bins=256, normed=True)[0]
-    cdf = np.cumsum(histogram)
-    entropy_cdf = np.cumsum(histogram * np.log(histogram + (histogram == 0)))
-    entropy_ratios = entropy_cdf / entropy_cdf[-1]
+    # Calculating histogram
+    histogram = np.histogram(image, bins=255, density=True)[0]
+
+    # Calculating histogram cumulative sum
+    hcs = np.cumsum(histogram)
+
+    # Calculating inverted histogram cumulative sum
+    i_hcs = 1.0 - hcs
+    i_hcs[i_hcs == 0] = 1  # To avoid log(0) calculations
+
+    # Calculating normed entropy cumulative sum
+    ec_norm = np.cumsum(histogram * np.log(histogram + (histogram == 0)))
+    ec_norm /= ec_norm[-1]
 
     max_entropy = 0
     threshold = 0
-
     for t in xrange(len(histogram) - 1):
         black_max = np.max(histogram[:t + 1])
         white_max = np.max(histogram[t + 1:])
         if black_max * white_max > 0:
-            e_ratio = entropy_ratios[t]
-            x = e_ratio * np.log(cdf[t])/np.log(black_max)
+            e_ratio = ec_norm[t]
+            x = e_ratio * np.log(hcs[t]) / np.log(black_max)
             y = 1.0 - e_ratio
-            z = np.log(1 - cdf[t]) / np.log(white_max)
+            z1 = np.log(i_hcs[t])
+            z2 = np.log(white_max)
+            z = z1 / z2
             entropy = x + y * z
 
             if max_entropy < entropy:
