@@ -32,7 +32,7 @@ def pun_threshold(image):
     i_hcs[i_hcs == 0] = 1  # To avoid log(0) calculations
 
     # Calculating normed entropy cumulative sum
-    ecs_norm = np.cumsum(-1 * histogram * np.log(histogram + (histogram == 0)))
+    ecs_norm = np.cumsum(histogram * np.log(histogram + (histogram == 0)))
     ecs_norm /= ecs_norm[-1]
 
     max_entropy = 0
