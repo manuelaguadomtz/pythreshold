@@ -42,7 +42,7 @@ def min_err_threshold(image):
     # Standard deviations
     b_std = ((np.arange(len(hist)) - b_mean)**2 * hist).cumsum() / w_backg
     f_std = ((np.arange(len(hist)) - f_mean) ** 2 * hist).cumsum()
-    f_std = (f_std[-1] - f_std) / (w_foreg + (w_foreg == 0))
+    f_std = (f_std[-1] - f_std) / w_foreg
 
     # To avoid log of 0 invalid calculations
     b_std[b_std == 0] = 1
