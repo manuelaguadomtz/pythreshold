@@ -22,7 +22,7 @@ def min_err_threshold(image):
     @rtype: int
     """
     # Input image histogram
-    hist = np.histogram(image, bins=256)[0].astype(np.float)
+    hist = np.histogram(image, bins=255)[0].astype(np.float)
 
     # The number of background pixels for each threshold
     w_backg = hist.cumsum()
