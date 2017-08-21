@@ -43,8 +43,11 @@ def kapur_threshold(image):
     Picture Thresholding Using the Entropy of the Histogram,’’ Computer Vision,
     Graphics, and Image Processing 29, no. 3 (1985): 273–285.
 
-    Keyword Arguments:
-    image -- The input image
+    @param image: The input image
+    @type image: ndarray
+
+    @return: The estimated threshold
+    @rtype: int
     """
     hist = np.histogram(image, range=(0, 255), bins=255, density=True)[0]
     cdf = hist.cumsum()
