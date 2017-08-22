@@ -7,37 +7,7 @@ __copyright__ = 'Copyright 2017'
 __author__ = u'Lic. Manuel Aguado Martínez'
 
 
-def __compute_entropy(x):
-    """"Compute the entropy of a gray value given his probability
-    and cumulative probability
-    """
-    return 0.0 if x <= 0 else -x * np.log(x)
-
-
-def __compute_total_entropy(histogram, cdf, threshold):
-    """Compute the total entropy given a threshold
-
-    Keywords:
-    histogram -- The input image histogram
-    cdf -- The cumulative histogram function
-    threshold -- The threshold to distinguish between black and white pixels
-    """
-    if histogram[threshold] == 0:
-        return 0
-
-    sb = np.log(cdf[threshold]) + 1 / cdf[threshold] *\
-        (__compute_entropy(histogram[threshold]) +
-         __compute_entropy(cdf[threshold - 1]))
-
-    white_pixels = cdf[len(histogram) - 1] - cdf[threshold - 1]
-    sw = np.log(white_pixels) + 1 / white_pixels *\
-        (__compute_entropy(histogram[threshold]) +
-         __compute_entropy(white_pixels - histogram[threshold]))
-
-    return 0 if sb * sw == 0 else sb + sw
-
-
-def johannsen_threshold(image, truncate_hist=True):
+def johannsen_threshold(image):
     """ Runs the Johannsen's threshold algorithm.
 
     Reference:
@@ -47,34 +17,36 @@ def johannsen_threshold(image, truncate_hist=True):
 
     @param image: The input image
     @type image: ndarray
-    @param truncate_hist: If true the algorithm not considered as valid
-        thresholds the first and the final values different of zero in the
-        histogram.
-    @type truncate_hist: bool
 
     @return: The estimated threshold
     @rtype: int
     """
     hist = np.histogram(image, range=(0, 255), bins=255, density=True)[0]
-    cdf = hist.cumsum()
 
-    start = 0
-    end = len(hist) - 1
-    if truncate_hist:
-        while hist[start] == 0:
-            start += 1
-        start += 1
-        while hist[end] == 0:
-            end -= 1
-        end -= 1
+    c_hist = hist.cumsum()
+    ic_hist = 1.0 - c_hist
 
-    min_entropy = 0
-    threshold = -1
+    # To avoid 0 invalid operations
+    c_hist[c_hist == 0] = 1
+    hist[hist == 0] = 1
+    ic_hist[ic_hist == 0] = 1
 
-    for t in xrange(start, end + 1):
-        entropy = __compute_total_entropy(hist, cdf, t)
-        if entropy != 0 and (min_entropy > entropy or threshold == -1):
-            min_entropy = entropy
-            threshold = t
+    # Obtaining shifted cumulative histograms
+    sc_hist = np.ones_like(c_hist)
+    sc_hist[1:] = c_hist[:-1]
 
-    return threshold
+    si_chist = np.ones_like(c_hist)
+    si_chist[1:] = ic_hist[:-1]
+
+    # Obtaining histogram entropy
+    h_entropy = -hist * np.log(hist)
+
+    # Background entropy
+    b_entropy = h_entropy - sc_hist * np.log(sc_hist)
+    s_backg = np.log(c_hist) + b_entropy / c_hist
+
+    # Foreground entropy
+    f_entropy = h_entropy - ic_hist * np.log(ic_hist)
+    s_foreg = np.log(si_chist) + f_entropy / si_chist
+
+    return np.argmin((s_foreg + s_backg)[1:-1])
