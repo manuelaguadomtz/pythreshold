@@ -3,7 +3,7 @@
 
 import numpy as np
 
-__copyright__ = 'Copyright 2014'
+__copyright__ = 'Copyright 2017'
 __author__ = u'Lic. Manuel Aguado Martínez'
 
 
