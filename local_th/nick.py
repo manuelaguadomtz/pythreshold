@@ -3,19 +3,21 @@
 
 import numpy as np
 
-__copyright__ = 'Copyright 2017'
+__copyright__ = 'Copyright 2015'
 __author__ = u'Lic. Manuel Aguado Martínez'
 
 
-def niblack_threshold(img, w_size=15, k=-0.2):
-    """ Runs the niblack's thresholding algorithm.
+def nick_threshold(img, w_size=15, k=-0.2):
+    """ Runs the NICK thresholding algorithm.
     
     Reference:
-    Niblack, W.: ‘An introduction to digital image
-    processing’ (Prentice- Hall, Englewood Cliffs, NJ, 1986), pp. 115–116
+    Khurshid, K., Siddiqi, I., Faure, C., & Vincent, N.
+    (2009, January). Comparison of Niblack inspired Binarization methods for
+    ancient documents. In IS&T/SPIE Electronic Imaging (pp. 72470U-72470U).
+    International Society for Optics and Photonics.
 
-    Modifications: Using integral images to compute the local mean and
-    standard deviation
+    Modifications: Using integral images to compute the local mean and the
+    right side value
 
     @param img: The input image
     @type img: ndarray
@@ -64,10 +66,11 @@ def niblack_threshold(img, w_size=15, k=-0.2):
     # Computing local means
     means = sums / l_size
 
-    # Computing local standard deviation
-    stds = np.sqrt(sqr_sums / l_size - np.square(means))
+    # Computing NICK variation of the Niblack term corresponding
+    # to the standard deviation
+    nick_stds = np.sqrt((sqr_sums - np.square(means)) / l_size)
 
     # Computing thresholds
-    thresholds = means + k * stds
+    thresholds = means + k * nick_stds
 
     return thresholds
