@@ -44,9 +44,7 @@ def sauvola_threshold(img, w_size=15, k=0.35):
     sqr_integral[1:, 1:] = np.cumsum(np.cumsum(sqr_img, axis=1), axis=0)
 
     # Defining grid
-    grid = np.meshgrid(np.arange(1, i_rows), np.arange(1, i_cols))
-    x = grid[0].ravel()
-    y = grid[1].ravel()
+    x, y = np.meshgrid(np.arange(1, i_rows), np.arange(1, i_cols))
 
     # Obtaining local coordinates
     hw_size = w_size / 2
@@ -73,4 +71,4 @@ def sauvola_threshold(img, w_size=15, k=0.35):
     # Computing thresholds
     thresholds = means * (1.0 + k * (stds / 128 - 1.0))
 
-    return thresholds.reshape((rows, cols))
+    return thresholds
