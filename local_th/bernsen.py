@@ -53,19 +53,31 @@ def bernsen_threshold(img, w_size=15, c_thr=30):
     @return: The estimated local threshold for each pixel
     @rtype: ndarray
     """
+    rows, cols = img.shape
+    thresholds = np.zeros(img.shape, np.uint8).ravel()
 
-    result = np.zeros(img.shape, np.uint8)
+    # Defining grid
+    x, y = np.meshgrid(np.arange(0, rows), np.arange(0, cols))
 
-    for i in xrange(0, img.shape[0]):
-        for j in xrange(0, img.shape[1]):
-            contrast, mid_gray = __window_threshold_and_mid_value(img,
-                                                                  (i, j),
-                                                                  w_size)
-            if contrast <= c_thr:
-                value = 255 if img.item(i, j) >= 128 else 0
-            else:
-                value = 255 if img.item(i, j) >= mid_gray else 0
+    # Obtaining local coordinates
+    hw_size = w_size / 2
+    x1 = (x - hw_size).clip(0, cols).ravel()
+    x2 = (x + hw_size).clip(0, cols).ravel()
+    y1 = (y - hw_size).clip(0, rows).ravel()
+    y2 = (y + hw_size).clip(0, rows).ravel()
 
-            result.itemset(i, j, value)
+    # Obtaining maximums and minimums
+    mins = np.zeros_like(x1)
+    maxs = np.zeros_like(x2)
+    for i in np.arange(len(x1)):
+        mins[i] = np.amin(img[y1[i]: y2[i] + 1, x1[i]: x2[i] + 1])
+        maxs[i] = np.amax(img[y1[i]: y2[i] + 1, x1[i]: x2[i] + 1])
 
-    return result
+    # calculating contrast and mid values
+    contrast = maxs - mins
+    mid_vals = (maxs + mins) / 2
+
+    thresholds[contrast <= c_thr] = 128
+    thresholds[contrast > c_thr] = mid_vals[contrast > c_thr]
+
+    return thresholds.reshape(img.shape)
