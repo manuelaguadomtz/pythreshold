@@ -33,35 +33,38 @@ def __window_threshold_and_mid_value(image, pos, window_size):
     return (maximum - minimum), (maximum + minimum) / 2
 
 
-def bernsen_threshold(image, window_size=15, contrast_threshold=30):
-    """ Runs the Bernsen thresholding algorithm
-
+def bernsen_threshold(img, w_size=15, c_thr=30):
+    """Runs the Bernsen thresholding algorithm
+    
+    Reference:
     Bernsen, J (1986), "Dynamic Thresholding of Grey-Level Images",
     Proc. of the 8th Int. Conf. on Pattern Recognition
 
-    Keywords:
-    image -- The input image
-        constraints:
-            -- Must be a gray scale image
-    window_size -- The size of the local window to compute
-                   each pixel threshold
-        constraints:
-            -- Should be an odd window
-    contrast_threshold -- The threshold contrast to determine an
+    
+    @param img: The input image. Must be a gray scale image
+    @type img: ndarray
+    @param w_size: The size of the local window to compute
+        each pixel threshold. Should be an odd window.
+    @type w_size: int
+    @param c_thr: The threshold contrast to determine an
         homogeneous region
+    @type c_thr: int
+    
+    @return: The estimated local threshold for each pixel
+    @rtype: ndarray
     """
 
-    result = np.zeros(image.shape, np.uint8)
+    result = np.zeros(img.shape, np.uint8)
 
-    for i in xrange(0, image.shape[0]):
-        for j in xrange(0, image.shape[1]):
-            contrast, mid_gray = __window_threshold_and_mid_value(image,
+    for i in xrange(0, img.shape[0]):
+        for j in xrange(0, img.shape[1]):
+            contrast, mid_gray = __window_threshold_and_mid_value(img,
                                                                   (i, j),
-                                                                  window_size)
-            if contrast <= contrast_threshold:
-                value = 255 if image.item(i, j) >= 128 else 0
+                                                                  w_size)
+            if contrast <= c_thr:
+                value = 255 if img.item(i, j) >= 128 else 0
             else:
-                value = 255 if image.item(i, j) >= mid_gray else 0
+                value = 255 if img.item(i, j) >= mid_gray else 0
 
             result.itemset(i, j, value)
 
