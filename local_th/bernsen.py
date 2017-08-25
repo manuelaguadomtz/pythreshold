@@ -3,6 +3,8 @@
 
 import numpy as np
 
+from skimage.util.shape import view_as_windows
+
 __copyright__ = 'Copyright 2015'
 __author__ = u'Lic. Manuel Aguado Martínez'
 
@@ -27,31 +29,31 @@ def bernsen_threshold(img, w_size=15, c_thr=30):
     @return: The estimated local threshold for each pixel
     @rtype: ndarray
     """
-    rows, cols = img.shape
-    thresholds = np.zeros(img.shape, np.uint8).ravel()
+    thresholds = np.zeros(img.shape, np.uint8)
 
-    # Defining grid
-    x, y = np.meshgrid(np.arange(0, rows), np.arange(0, cols))
-
-    # Obtaining local coordinates
+    # Obtaining windows
     hw_size = w_size / 2
-    x1 = (x - hw_size).clip(0, cols).ravel()
-    x2 = (x + hw_size).clip(0, cols).ravel()
-    y1 = (y - hw_size).clip(0, rows).ravel()
-    y2 = (y + hw_size).clip(0, rows).ravel()
+    padded_img_min = np.ones((img.shape[0] + w_size, img.shape[1] + w_size)) * 256
+    padded_img_min[hw_size: -hw_size - 1, hw_size: -hw_size - 1] = img
+    padded_img_max = np.ones((img.shape[0] + w_size, img.shape[1] + w_size)) * -1
+    padded_img_max[hw_size: -hw_size - 1 , hw_size: -hw_size - 1] = img
 
-    # Obtaining maximums and minimums
-    mins = np.zeros_like(x1)
-    maxs = np.zeros_like(x2)
-    for i in np.arange(len(x1)):
-        mins[i] = np.amin(img[y1[i]: y2[i] + 1, x1[i]: x2[i] + 1])
-        maxs[i] = np.amax(img[y1[i]: y2[i] + 1, x1[i]: x2[i] + 1])
+    min_winds = view_as_windows(padded_img_min, (w_size, w_size))
+    max_winds = view_as_windows(padded_img_max, (w_size, w_size))
 
-    # calculating contrast and mid values
+    # Estimating maximums and minimums values
+    mins = np.zeros_like(img)
+    maxs = np.zeros_like(img)
+    for i in np.arange(img.shape[0]):
+        for j in np.arange(img.shape[1]):
+            maxs[i, j] = np.max(max_winds[i, j])
+            mins[i, j] = np.min(min_winds[i, j])
+
+    # Calculating contrast and mid values
     contrast = maxs - mins
     mid_vals = (maxs + mins) / 2
 
     thresholds[contrast <= c_thr] = 128
     thresholds[contrast > c_thr] = mid_vals[contrast > c_thr]
 
-    return thresholds.reshape(img.shape)
+    return thresholds
