@@ -33,21 +33,15 @@ def bernsen_threshold(img, w_size=15, c_thr=30):
 
     # Obtaining windows
     hw_size = w_size / 2
-    padded_img_min = np.ones((img.shape[0] + w_size - 1,
-                              img.shape[1] + w_size - 1)) * 256
-    padded_img_min[hw_size: -hw_size,
-                   hw_size: -hw_size] = img
+    padded_img = np.ones((img.shape[0] + w_size - 1,
+                          img.shape[1] + w_size - 1)) * np.nan
+    padded_img[hw_size: -hw_size,
+               hw_size: -hw_size] = img
 
-    padded_img_max = np.ones((img.shape[0] + w_size - 1,
-                              img.shape[1] + w_size - 1)) * -1
-    padded_img_max[hw_size: -hw_size,
-                   hw_size: -hw_size] = img
+    winds = view_as_windows(padded_img, (w_size, w_size))
 
-    min_winds = view_as_windows(padded_img_min, (w_size, w_size))
-    max_winds = view_as_windows(padded_img_max, (w_size, w_size))
-
-    mins = np.amin(min_winds, axis=(2, 3))
-    maxs = np.amax(max_winds, axis=(2, 3))
+    mins = np.nanmin(winds, axis=(2, 3))
+    maxs = np.nanmax(winds, axis=(2, 3))
 
     # Calculating contrast and mid values
     contrast = maxs - mins
