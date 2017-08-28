@@ -22,6 +22,7 @@ def johannsen_threshold(image):
     @rtype: int
     """
     hist = np.histogram(image, range=(0, 255), bins=255, density=True)[0]
+    hist = np.trim_zeros(hist)
 
     c_hist = hist.cumsum()
     ic_hist = 1.0 - c_hist
@@ -49,4 +50,4 @@ def johannsen_threshold(image):
     f_entropy = h_entropy - ic_hist * np.log(ic_hist)
     s_foreg = np.log(si_chist) + f_entropy / si_chist
 
-    return np.argmin((s_foreg + s_backg)[1:-1])
+    return np.argmin((s_foreg + s_backg)[1:-1]) + 1
