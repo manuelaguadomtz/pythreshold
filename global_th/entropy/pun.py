@@ -25,11 +25,11 @@ def pun_threshold(image):
 
     # Calculating histogram cumulative sum
     hcs = np.cumsum(histogram)
-    hcs[hcs == 0] = 1  # To avoid log(0) calculations
+    hcs[hcs <= 0] = 1  # To avoid log invalid calculations
 
     # Calculating inverted histogram cumulative sum
     i_hcs = 1.0 - hcs
-    i_hcs[i_hcs == 0] = 1  # To avoid log(0) calculations
+    i_hcs[i_hcs <= 0] = 1  # To avoid log invalid calculations
 
     # Calculating normed entropy cumulative sum
     ecs_norm = np.cumsum(histogram * np.log(histogram + (histogram == 0)))

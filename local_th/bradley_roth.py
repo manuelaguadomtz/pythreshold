@@ -33,12 +33,12 @@ def bradley_roth_threshold(img, w_size=15, w=0.15):
 
     # Computing integral image
     # Leaving first row and column in zero for convenience
-    integral = np.zeros((i_rows, i_cols), np.float)
+    integ = np.zeros((i_rows, i_cols), np.float)
 
-    integral[1:, 1:] = np.cumsum(np.cumsum(img, axis=1), axis=0)
+    integ[1:, 1:] = np.cumsum(np.cumsum(img.astype(np.float), axis=0), axis=1)
 
     # Defining grid
-    x, y = np.meshgrid(np.arange(1, i_rows), np.arange(1, i_cols))
+    x, y = np.meshgrid(np.arange(1, i_cols), np.arange(1, i_rows))
 
     # Obtaining local coordinates
     hw_size = w_size / 2
@@ -48,11 +48,11 @@ def bradley_roth_threshold(img, w_size=15, w=0.15):
     y2 = (y + hw_size).clip(1, rows)
 
     # Obtaining local areas size
-    l_size = (x2 - x1 + 1) * (y2 - y1 + 1)
+    l_size = (y2 - y1 + 1) * (x2 - x1 + 1)
 
     # Computing sums
-    sums = (integral[y2, x2] - integral[y2, x1 - 1] -
-            integral[y1 - 1, x2] + integral[y1 - 1, x1 - 1])
+    sums = (integ[y2, x2] - integ[y2, x1 - 1] -
+            integ[y1 - 1, x2] + integ[y1 - 1, x1 - 1])
 
     # Computing local means
     means = sums / l_size

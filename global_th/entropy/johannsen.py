@@ -27,9 +27,9 @@ def johannsen_threshold(image):
     ic_hist = 1.0 - c_hist
 
     # To avoid 0 invalid operations
-    c_hist[c_hist == 0] = 1
-    hist[hist == 0] = 1
-    ic_hist[ic_hist == 0] = 1
+    c_hist[c_hist <= 0] = 1
+    hist[hist <= 0] = 1
+    ic_hist[ic_hist <= 0] = 1
 
     # Obtaining shifted cumulative histograms
     sc_hist = np.ones_like(c_hist)

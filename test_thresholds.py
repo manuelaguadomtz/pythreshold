@@ -1,11 +1,13 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
 
+import argparse
+
 from timeit import default_timer
 
 import matplotlib.pyplot as plt
 
-from scipy.misc import ascent
+from scipy.misc import face, imread
 
 # Importing thresholding algorithms
 from global_th.otsu import otsu_threshold
@@ -257,5 +259,19 @@ def threshold_and_plot(img):
     plt.show()
 
 if __name__ == '__main__':
-    input_img = ascent()
+
+    # Creating argument parser
+    arg_p = argparse.ArgumentParser()
+    arg_p.add_argument('-i', '--image', required=False, help='Input image')
+
+    # Parsing arguments
+    args = arg_p.parse_args()
+
+    # Loading image
+    if args.image:
+        input_img = imread(args.image, flatten=True)
+    else:
+        input_img = face(gray=True)
+
+    # Thresholding and plotting
     threshold_and_plot(input_img)

@@ -25,11 +25,11 @@ def kapur_threshold(image):
     c_hist = hist.cumsum()
     c_hist_i = 1.0 - c_hist
 
-    # To avoid invalid operations regarding 0.
-    c_hist[c_hist == 0] = 1
-    c_hist_i[c_hist_i == 0] = 1
+    # To avoid invalid operations regarding 0 and negative values.
+    c_hist[c_hist <= 0] = 1
+    c_hist_i[c_hist_i <= 0] = 1
 
-    c_entropy = (hist * np.log(hist + (hist == 0))).cumsum()
+    c_entropy = (hist * np.log(hist + (hist <= 0))).cumsum()
     b_entropy = -c_entropy / c_hist + np.log(c_hist)
 
     c_entropy_i = c_entropy[-1] - c_entropy
