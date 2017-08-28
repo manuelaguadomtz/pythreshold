@@ -65,10 +65,8 @@ def singh_threshold(img, w_size=15, k=0.35):
     means = sums / l_size
 
     # Obtaining windows
-    padded_img = np.ones((img.shape[0] + w_size - 1,
-                          img.shape[1] + w_size - 1)) * np.nan
-    padded_img[hw_size: -hw_size,
-               hw_size: -hw_size] = img
+    padded_img = np.ones((rows + w_size - 1, cols + w_size - 1)) * np.nan
+    padded_img[hw_size: -hw_size, hw_size: -hw_size] = img
 
     winds = view_as_windows(padded_img, (w_size, w_size))
 
