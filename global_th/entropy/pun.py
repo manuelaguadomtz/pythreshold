@@ -21,10 +21,10 @@ def pun_threshold(image):
     @rtype: int
     """
     # Calculating histogram
-    histogram = np.histogram(image, range=(0, 255), bins=255, density=True)[0]
+    hist, _ = np.histogram(image, bins=range(256), density=True)
 
     # Calculating histogram cumulative sum
-    hcs = np.cumsum(histogram)
+    hcs = np.cumsum(hist)
     hcs[hcs <= 0] = 1  # To avoid log invalid calculations
 
     # Calculating inverted histogram cumulative sum
@@ -32,14 +32,14 @@ def pun_threshold(image):
     i_hcs[i_hcs <= 0] = 1  # To avoid log invalid calculations
 
     # Calculating normed entropy cumulative sum
-    ecs_norm = np.cumsum(histogram * np.log(histogram + (histogram == 0)))
+    ecs_norm = np.cumsum(hist * np.log(hist + (hist <= 0)))
     ecs_norm /= ecs_norm[-1]
 
     max_entropy = 0
     threshold = 0
-    for t in range(len(histogram) - 1):
-        black_max = np.max(histogram[:t + 1])
-        white_max = np.max(histogram[t + 1:])
+    for t in range(len(hist) - 1):
+        black_max = np.max(hist[:t + 1])
+        white_max = np.max(hist[t + 1:])
         if black_max * white_max != 0:
             x = ecs_norm[t] * np.log(hcs[t]) / np.log(black_max)
             y = 1.0 - ecs_norm[t]

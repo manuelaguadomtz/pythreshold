@@ -32,7 +32,7 @@ def otsu_threshold(image=None, hist=None):
 
     # Calculating histogram
     if not hist:
-        hist = np.histogram(image, range=(0, 255), bins=255)[0].astype(np.float)
+        hist = np.histogram(image, bins=range(256))[0].astype(np.float)
 
     cdf_backg = np.cumsum(np.arange(len(hist)) * hist)
     w_backg = np.cumsum(hist)  # The number of background pixels

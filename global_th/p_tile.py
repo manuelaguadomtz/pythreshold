@@ -22,7 +22,7 @@ def p_tile_threshold(image, pct):
     @rtype int
     """
     n_pixels = pct * image.shape[0] * image.shape[1]
-    hist = np.histogram(image, range=(0, 255), bins=255)[0]
+    hist = np.histogram(image, bins=range(256))[0]
     hist = np.cumsum(hist)
 
     return np.argmin(np.abs(hist - n_pixels))
