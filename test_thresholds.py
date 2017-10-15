@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # -*- coding:utf-8 -*-
 
 import argparse
@@ -258,8 +257,8 @@ def threshold_and_plot(img):
     # Showing plots
     plt.show()
 
-if __name__ == '__main__':
 
+if __name__ == '__main__':
     # Creating argument parser
     arg_p = argparse.ArgumentParser()
     arg_p.add_argument('-i', '--image', required=False, help='Input image')
