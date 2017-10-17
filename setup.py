@@ -4,7 +4,7 @@ from distutils.core import setup
 
 setup(
     name='pythreshold',
-    version='1.0.0',
+    version='0.1.1',
     py_modules=['pythreshold/utils', 'pythreshold/local_th/bernsen', 'pythreshold/local_th/bradley_roth',
                 'pythreshold/local_th/contrast', 'pythreshold/local_th/feng', 'pythreshold/local_th/lmean',
                 'pythreshold/local_th/niblack', 'pythreshold/local_th/nick', 'pythreshold/local_th/sauvola',
@@ -16,4 +16,8 @@ setup(
     author_email='manuelaguadomtz@gmail.com',
     url='https://www.researchgate.net/profile/Manuel_Aguado_Martinez2',
     description='Numpy/Scipy implementations of some image thresholding algorithms',
+    install_requires=['numpy',
+                      'scipy',
+                      'skimage',
+                      'matplotlib']
 )
