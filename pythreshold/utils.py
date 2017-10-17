@@ -5,6 +5,8 @@ from timeit import default_timer
 import numpy as np
 import matplotlib.pyplot as plt
 
+from scipy.misc import face
+
 # Importing thresholding algorithms
 from global_th.otsu import otsu_threshold
 from global_th.p_tile import p_tile_threshold
@@ -26,7 +28,7 @@ from local_th.singh import singh_threshold
 from local_th.feng import feng_threshold
 
 __copyright__ = 'Copyright 2017'
-__author__ = u'Lic. Manuel Aguado Martínez'
+__author__ = u'BSc. Manuel Aguado Martínez'
 
 
 def apply_threshold(img, threshold=128, wp_val=255):
@@ -47,13 +49,17 @@ def apply_threshold(img, threshold=128, wp_val=255):
     return ((img >= threshold) * wp_val).astype(np.uint8)
 
 
-def test_thresholds(img):
+def test_thresholds(img=None):
     """Runs all the package thresholding algorithms on the input 
     image with default parameters and plot the results.
     
     @param img: The input gray scale image
     @type img: ndarray
     """
+    # Loading image if needed
+    if img is None:
+        img = face(gray=True)
+
     # Plotting test image
     plt.figure('image')
     plt.imshow(img, cmap='gray')

@@ -5,7 +5,7 @@ import numpy as np
 from skimage.util.shape import view_as_windows
 
 __copyright__ = 'Copyright 2017'
-__author__ = u'Lic. Manuel Aguado Martínez'
+__author__ = u'BSc. Manuel Aguado Martínez'
 
 
 def feng_threshold(img, w_size1=15, w_size2=30,

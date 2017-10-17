@@ -5,7 +5,7 @@ import numpy as np
 from skimage.util.shape import view_as_windows
 
 __copyright__ = 'Copyright 2017'
-__author__ = u'Lic. Manuel Aguado Martínez'
+__author__ = u'BSc. Manuel Aguado Martínez'
 
 
 def singh_threshold(img, w_size=15, k=0.35):

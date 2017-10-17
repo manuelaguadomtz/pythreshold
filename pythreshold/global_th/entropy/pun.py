@@ -3,7 +3,7 @@
 import numpy as np
 
 __copyright__ = 'Copyright 2017'
-__author__ = u'Lic. Manuel Aguado Martínez'
+__author__ = u'BSc. Manuel Aguado Martínez'
 
 
 def pun_threshold(image):

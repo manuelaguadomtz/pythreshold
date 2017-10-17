@@ -5,7 +5,7 @@ import numpy as np
 from skimage.util.shape import view_as_windows
 
 __copyright__ = 'Copyright 2015'
-__author__ = u'Lic. Manuel Aguado Martínez'
+__author__ = u'BSc. Manuel Aguado Martínez'
 
 
 def contrast_threshold(img, w_size=15):

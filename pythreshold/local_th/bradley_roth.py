@@ -3,7 +3,7 @@
 import numpy as np
 
 __copyright__ = 'Copyright 2017'
-__author__ = u'Lic. Manuel Aguado Martínez'
+__author__ = u'BSc. Manuel Aguado Martínez'
 
 
 def bradley_roth_threshold(img, w_size=15, w=0.15):

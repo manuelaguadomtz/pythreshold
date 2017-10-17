@@ -4,7 +4,7 @@ import numpy as np
 from scipy.ndimage import gaussian_filter
 
 __copyright__ = 'Copyright 2017'
-__author__ = u'Lic. Manuel Aguado Martínez'
+__author__ = u'BSc. Manuel Aguado Martínez'
 
 
 def two_peaks_threshold(image, smooth_hist=True, sigma=5):
