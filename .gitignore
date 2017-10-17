@@ -4,3 +4,9 @@
 # Ignoring python bytecode files
 *.pyc
 
+# Ignoring MANIFEST file
+MANIFEST
+
+# Ignoring dist directory
+dist/
+
