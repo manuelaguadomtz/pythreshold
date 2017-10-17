@@ -1,23 +1,30 @@
 # -*- coding:utf-8 -*-
 
-from distutils.core import setup
+from setuptools import setup, find_packages
 
 setup(
+    # Package name
     name='pythreshold',
+
+    # Package version
     version='0.1.2',
-    py_modules=['pythreshold/utils', 'pythreshold/local_th/bernsen', 'pythreshold/local_th/bradley_roth',
-                'pythreshold/local_th/contrast', 'pythreshold/local_th/feng', 'pythreshold/local_th/lmean',
-                'pythreshold/local_th/niblack', 'pythreshold/local_th/nick', 'pythreshold/local_th/sauvola',
-                'pythreshold/local_th/singh', 'pythreshold/local_th/wolf', 'pythreshold/global_th/min_err',
-                'pythreshold/global_th/otsu', 'pythreshold/global_th/p_tile', 'pythreshold/global_th/two_peaks',
-                'pythreshold/global_th/entropy/johannsen', 'pythreshold/global_th/entropy/kapur',
-                'pythreshold/global_th/entropy/pun'],
+
+    # Included packages
+    packages=find_packages(),
+
+    # Package author information
     author=u'BSc. Manuel Aguado Martínez',
     author_email='manuelaguadomtz@gmail.com',
     url='https://www.researchgate.net/profile/Manuel_Aguado_Martinez2',
-    description='Numpy/Scipy implementations of some image thresholding algorithms',
+
+    # Package requirements
     install_requires=['numpy',
                       'scipy',
                       'scikit-image',
-                      'matplotlib']
+                      'matplotlib'],
+
+    # Package description
+    description='Numpy/Scipy implementations of some image thresholding algorithms',
+    keywords='thresholding entropy'
+
 )
