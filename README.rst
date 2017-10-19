@@ -1,6 +1,5 @@
 PyThreshold
 ===========
-.. epigraph::
 
 **PyThreshold** is a python package featuring Numpy/Scipy implementations of state-of-the-art image thresholding algorithms.
 
@@ -27,15 +26,12 @@ Usage
   test_thresholds(ascent())
 
 Additional Information
----------------------
+----------------------
 
 Do you find **PyThreshold** useful? You can collaborate with us:
 
-https://gitlab.com/manuelaguadomtz/pythreshold
+`Link gitlab <https://gitlab.com/manuelaguadomtz/pythreshold>`_
 
 Additional materials and information can be found at:
 
-https://www.researchgate.net/project/Numpy-Scipy-implementations-of-image-thresholding-algorithms
-
-
-
+`Link researchgate <https://www.researchgate.net/project/Numpy-Scipy-implementations-of-image-thresholding-algorithms>`_

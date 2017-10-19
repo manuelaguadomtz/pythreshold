@@ -7,7 +7,7 @@ setup(
     name='pythreshold',
 
     # Package version
-    version='0.1.3',
+    version='0.1.7',
 
     # Included packages
     packages=find_packages(),
@@ -25,6 +25,6 @@ setup(
 
     # Package description
     description='Numpy/Scipy implementations of state-of-the-art image thresholding algorithms',
-    keywords='thresholding entropy'
+    keywords='thresholding entropy',
 
 )
