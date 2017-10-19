@@ -11,8 +11,9 @@ __author__ = u'BSc. Manuel Aguado Martínez'
 def contrast_threshold(img, w_size=15):
     """Runs the contrast thresholding algorithm
 
-    Reference:
-
+    Reference: 
+    Parker, J. R. (2010). Algorithms for image processing and
+    computer vision. John Wiley & Sons.
 
     @param img: The input image. Must be a gray scale image
     @type img: ndarray

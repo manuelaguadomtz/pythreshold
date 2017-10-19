@@ -16,6 +16,10 @@ def two_peaks_threshold(image, smooth_hist=True, sigma=5):
     while the algorithm will look for the second peak by multiplying the
     histogram values by the square of the distance from the first peak.
     This gives preference to peaks that are not close to the maximum.
+    
+    Reference: 
+    Parker, J. R. (2010). Algorithms for image processing and
+    computer vision. John Wiley & Sons.
 
     @param image: The input image
     @type image: ndarray

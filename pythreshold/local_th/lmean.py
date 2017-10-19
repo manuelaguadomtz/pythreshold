@@ -9,7 +9,9 @@ __author__ = u'BSc. Manuel Aguado Martínez'
 def lmean_threshold(img, w_size=15):
     """ Runs the local mean thresholding algorithm.
 
-    Reference:
+    Reference: 
+    Parker, J. R. (2010). Algorithms for image processing and
+    computer vision. John Wiley & Sons.
 
     Modifications: Using integral images to compute local mean.
 

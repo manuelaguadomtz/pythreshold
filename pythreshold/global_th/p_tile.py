@@ -9,7 +9,9 @@ __author__ = u'BSc. Manuel Aguado Martínez'
 def p_tile_threshold(image, pct):
     """Runs the p-tile threshold algorithm.
     
-    Reference:
+    Reference: 
+    Parker, J. R. (2010). Algorithms for image processing and
+    computer vision. John Wiley & Sons.
     
     @param image: The input image
     @type image: ndarray
