@@ -7,25 +7,19 @@ import matplotlib.pyplot as plt
 
 from scipy.misc import face
 
-# Importing thresholding algorithms
-from global_th.otsu import otsu_threshold
-from global_th.p_tile import p_tile_threshold
-from global_th.two_peaks import two_peaks_threshold
-from global_th.min_err import min_err_threshold
-from global_th.entropy.pun import pun_threshold
-from global_th.entropy.kapur import kapur_threshold
-from global_th.entropy.johannsen import johannsen_threshold
+# Importing global thresholding algorithms
+from global_th import otsu_threshold, p_tile_threshold,\
+    two_peaks_threshold, min_err_threshold
 
-from local_th.sauvola import sauvola_threshold
-from local_th.niblack import niblack_threshold
-from local_th.wolf import wolf_threshold
-from local_th.nick import nick_threshold
-from local_th.lmean import lmean_threshold
-from local_th.bradley_roth import bradley_roth_threshold
-from local_th.bernsen import bernsen_threshold
-from local_th.contrast import contrast_threshold
-from local_th.singh import singh_threshold
-from local_th.feng import feng_threshold
+# Importing global entropy thresholding algorithms
+from global_th.entropy import pun_threshold, kapur_threshold,\
+    johannsen_threshold
+
+# Importing local thresholding algorithms
+from local_th import sauvola_threshold, niblack_threshold, wolf_threshold,\
+    nick_threshold, lmean_threshold, bradley_roth_threshold,\
+    bernsen_threshold, contrast_threshold, singh_threshold, feng_threshold
+
 
 __copyright__ = 'Copyright 2017'
 __author__ = u'BSc. Manuel Aguado Martínez'
