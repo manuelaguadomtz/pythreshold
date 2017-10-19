@@ -2,6 +2,10 @@
 
 from setuptools import setup, find_packages
 
+# Get the long description from the README file
+with open('README.rst') as f:
+    readme = f.read()
+
 setup(
     # Package name
     name='pythreshold',
@@ -25,6 +29,7 @@ setup(
 
     # Package description
     description='Numpy/Scipy implementations of state-of-the-art image thresholding algorithms',
+    long_description=readme,
     keywords='thresholding entropy',
 
 )
