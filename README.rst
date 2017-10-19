@@ -30,8 +30,8 @@ Additional Information
 
 Do you find **PyThreshold** useful? You can collaborate with us:
 
-`Link gitlab <https://gitlab.com/manuelaguadomtz/pythreshold>`_
+`Link Gitlab <https://gitlab.com/manuelaguadomtz/pythreshold>`_
 
 Additional materials and information can be found at:
 
-`Link researchgate <https://www.researchgate.net/project/Numpy-Scipy-implementations-of-image-thresholding-algorithms>`_
+`Link ResearchGate <https://www.researchgate.net/project/Numpy-Scipy-implementations-of-image-thresholding-algorithms>`_
