@@ -8,15 +8,15 @@ import matplotlib.pyplot as plt
 from scipy.misc import face
 
 # Importing global thresholding algorithms
-from global_th import otsu_threshold, p_tile_threshold,\
+from .global_th import otsu_threshold, p_tile_threshold,\
     two_peaks_threshold, min_err_threshold
 
 # Importing global entropy thresholding algorithms
-from global_th.entropy import pun_threshold, kapur_threshold,\
+from .global_th.entropy import pun_threshold, kapur_threshold,\
     johannsen_threshold
 
 # Importing local thresholding algorithms
-from local_th import sauvola_threshold, niblack_threshold, wolf_threshold,\
+from .local_th import sauvola_threshold, niblack_threshold, wolf_threshold,\
     nick_threshold, lmean_threshold, bradley_roth_threshold,\
     bernsen_threshold, contrast_threshold, singh_threshold, feng_threshold
 
@@ -28,15 +28,15 @@ __author__ = u'BSc. Manuel Aguado Martínez'
 def apply_threshold(img, threshold=128, wp_val=255):
     """Obtain a binary image based on a given global threshold or
     a set of local thresholds.
-    
+
     @param img: The input image.
     @type img: ndarray
-    @param threshold: The global or local thresholds corresponding 
+    @param threshold: The global or local thresholds corresponding
         to each pixel of the image.
     @type threshold: Union[int, ndarray]
     @param wp_val: The value assigned to foreground pixels (white pixels).
     @type wp_val: int
-    
+
     @return: A binary image.
     @rtype: ndarray
     """
@@ -44,9 +44,9 @@ def apply_threshold(img, threshold=128, wp_val=255):
 
 
 def test_thresholds(img=None):
-    """Runs all the package thresholding algorithms on the input 
+    """Runs all the package thresholding algorithms on the input
     image with default parameters and plot the results.
-    
+
     @param img: The input gray scale image
     @type img: ndarray
     """

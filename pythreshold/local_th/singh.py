@@ -8,7 +8,7 @@ __copyright__ = 'Copyright 2017'
 __author__ = u'BSc. Manuel Aguado Martínez'
 
 
-def singh_threshold(img, w_size=15, k=0.35):
+def singh_threshold(img, w_size=15, k=0.85):  # 0.35
     """ Runs the Singh thresholding algorithm
     
     Reference:
