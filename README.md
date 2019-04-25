@@ -17,7 +17,8 @@
     test_thresholds()
 
     # Testing all the included thresholding algorithms using a custom image
-    test_thresholds(ascent())
+    img = ascent()
+    test_thresholds(img)
 
 ## Additional Information
 
