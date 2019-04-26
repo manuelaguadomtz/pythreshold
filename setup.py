@@ -19,7 +19,9 @@ setup(
     # Package author information
     author=u'BSc. Manuel Aguado Martínez',
     author_email='manuelaguadomtz@gmail.com',
-    url='https://www.researchgate.net/profile/Manuel_Aguado_Martinez2',
+
+    # Repository URL
+    url='https://github.com/manuelaguadomtz/pythreshold',
 
     # Package requirements
     install_requires=['numpy',
@@ -34,4 +36,11 @@ setup(
     long_description_content_type='text/markdown',
     keywords='thresholding entropy',
 
+    classifiers=[
+        'Intended Audience :: Science/Research',
+        'Operating System :: OS Independent',
+        'Topic :: Scientific/Engineering',
+        'Programming Language :: Python',
+        'License :: OSI Approved :: MIT License'
+    ],
 )
