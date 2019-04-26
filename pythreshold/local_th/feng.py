@@ -55,7 +55,7 @@ def feng_threshold(img, w_size1=15, w_size2=30,
     x, y = np.meshgrid(np.arange(1, i_cols), np.arange(1, i_rows))
 
     # Obtaining local coordinates
-    hw_size = w_size1 / 2
+    hw_size = w_size1 // 2
     x1 = (x - hw_size).clip(1, cols)
     x2 = (x + hw_size).clip(1, cols)
     y1 = (y - hw_size).clip(1, rows)
@@ -86,7 +86,7 @@ def feng_threshold(img, w_size1=15, w_size2=30,
     mins = np.nanmin(winds, axis=(2, 3))
 
     # Obtaining local coordinates for std range calculations
-    hw_size = w_size2 / 2
+    hw_size = w_size2 // 2
     x1 = (x - hw_size).clip(1, cols)
     x2 = (x + hw_size).clip(1, cols)
     y1 = (y - hw_size).clip(1, rows)

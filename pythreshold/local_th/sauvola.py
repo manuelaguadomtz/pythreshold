@@ -46,7 +46,7 @@ def sauvola_threshold(img, w_size=15, k=0.35):
     x, y = np.meshgrid(np.arange(1, i_cols), np.arange(1, i_rows))
 
     # Obtaining local coordinates
-    hw_size = w_size / 2
+    hw_size = w_size // 2
     x1 = (x - hw_size).clip(1, cols)
     x2 = (x + hw_size).clip(1, cols)
     y1 = (y - hw_size).clip(1, rows)
