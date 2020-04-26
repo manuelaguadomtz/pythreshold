@@ -15,7 +15,7 @@ def pun_threshold(image):
 
     @param image: The input image
     @type image: ndarray
-    
+
     @return: The estimated threshold
     @rtype: int
     """
@@ -48,5 +48,5 @@ def pun_threshold(image):
             if max_entropy < entropy:
                 max_entropy = entropy
                 threshold = t
-    
+
     return threshold

@@ -13,10 +13,10 @@ def min_err_threshold(image):
     Kittler, J. and J. Illingworth. ‘‘On Threshold Selection Using Clustering
     Criteria,’’ IEEE Transactions on Systems, Man, and Cybernetics 15, no. 5
     (1985): 652–655.
-    
+
     @param image: The input image
     @type image: ndarray
-    
+
     @return: The threshold that minimize the error
     @rtype: int
     """
