@@ -11,7 +11,7 @@ setup(
     name='pythreshold',
 
     # Package version
-    version='0.2.1',
+    version='0.2.2',
 
     # Included packages
     packages=find_packages(),
@@ -23,11 +23,20 @@ setup(
     # Repository URL
     url='https://github.com/manuelaguadomtz/pythreshold',
 
+    entry_points={
+        'console_scripts': [
+            'pythreshold = pythreshold.main:test_thresholds_main',
+        ],
+    },
+
     # Package requirements
-    install_requires=['numpy',
-                      'scipy',
-                      'scikit-image',
-                      'matplotlib'],
+    install_requires=[
+        'numpy',
+        'scipy',
+        'scikit-image',
+        'matplotlib',
+        'opencv-python'
+    ],
 
     # Package description
     description='Numpy/Scipy implementations of state-of-the-art image'

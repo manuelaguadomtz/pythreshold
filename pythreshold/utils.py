@@ -1,9 +1,11 @@
 # -*- coding:utf-8 -*-
 
 from timeit import default_timer
+from os.path import join
 
 import numpy as np
 import matplotlib.pyplot as plt
+import cv2
 
 from scipy.misc import face
 
@@ -43,7 +45,7 @@ def apply_threshold(img, threshold=128, wp_val=255):
     return ((img >= threshold) * wp_val).astype(np.uint8)
 
 
-def test_thresholds(img=None):
+def test_thresholds_plt(img=None):
     """Runs all the package thresholding algorithms on the input
     image with default parameters and plot the results.
 
@@ -53,10 +55,6 @@ def test_thresholds(img=None):
     # Loading image if needed
     if img is None:
         img = face(gray=True)
-
-    # Plotting test image
-    plt.figure('image')
-    plt.imshow(img, cmap='gray')
 
     # Plotting test image histogram
     plt.figure('Histogram')
@@ -275,3 +273,188 @@ def test_thresholds(img=None):
 
     # Showing plots
     plt.show()
+
+
+def test_thresholds(img, odir, basename):
+    """Runs all the package thresholding algorithms on the input
+    image with default parameters and plot the results.
+
+    @param img: The input gray scale image
+    @type img: ndarray
+    """
+    # Applying Otsu method
+    start = default_timer()
+    th = otsu_threshold(img)
+    stop = default_timer()
+    print('========Otsu==========')
+    print('Threshold: {0}'.format(th))
+    print('Execution time: {0}'.format(stop - start))
+    print('====================================')
+    fname = join(odir, "%s_Otsu.jpg" % basename)
+    cv2.imwrite(fname, apply_threshold(img, th))
+
+    # Applying p_tile method
+    start = default_timer()
+    th = p_tile_threshold(img, 0.5)
+    stop = default_timer()
+    print('========P-tile [p=0.5]==========')
+    print('Threshold: {0}'.format(th))
+    print('Execution time: {0}'.format(stop - start))
+    print('====================================')
+    fname = join(odir, "%s_p_tile.jpg" % basename)
+    cv2.imwrite(fname, apply_threshold(img, th))
+
+    # Applying two peaks method
+    start = default_timer()
+    th = two_peaks_threshold(img)
+    stop = default_timer()
+    print('========Two peaks==========')
+    print('Threshold: {0}'.format(th))
+    print('Execution time: {0}'.format(stop - start))
+    print('====================================')
+    fname = join(odir, "%s_2peaks.jpg" % basename)
+    cv2.imwrite(fname, apply_threshold(img, th))
+
+    # Applying minimum error method
+    start = default_timer()
+    th = min_err_threshold(img)
+    stop = default_timer()
+    print('========Minimum Error==========')
+    print('Threshold: {0}'.format(th))
+    print('Execution time: {0}'.format(stop - start))
+    print('====================================')
+    fname = join(odir, "%s_minError.jpg" % basename)
+    cv2.imwrite(fname, apply_threshold(img, th))
+
+    # Applying global entropy Pun method
+    start = default_timer()
+    th = pun_threshold(img)
+    stop = default_timer()
+    print('========Global entropy Pun==========')
+    print('Threshold: {0}'.format(th))
+    print('Execution time: {0}'.format(stop - start))
+    print('====================================')
+    fname = join(odir, "%s_entropyPun.jpg" % basename)
+    cv2.imwrite(fname, apply_threshold(img, th))
+
+    # Applying global entropy Kapur method
+    start = default_timer()
+    th = kapur_threshold(img)
+    stop = default_timer()
+    print('========Global entropy Kapur==========')
+    print('Threshold: {0}'.format(th))
+    print('Execution time: {0}'.format(stop - start))
+    print('====================================')
+    fname = join(odir, "%s_entropyKapur.jpg" % basename)
+    cv2.imwrite(fname, apply_threshold(img, th))
+
+    # Applying global entropy Johannsen method
+    start = default_timer()
+    th = johannsen_threshold(img)
+    stop = default_timer()
+    print('========Global entropy Johannsen==========')
+    print('Threshold: {0}'.format(th))
+    print('Execution time: {0}'.format(stop - start))
+    print('====================================')
+    fname = join(odir, "%s_entropyJohannsen.jpg" % basename)
+    cv2.imwrite(fname, apply_threshold(img, th))
+
+    # Applying local Sauvola method
+    start = default_timer()
+    th = sauvola_threshold(img)
+    stop = default_timer()
+    print('========Local Sauvola==========')
+    print('Execution time: {0}'.format(stop - start))
+    print('====================================')
+    fname = join(odir, "%s_sauvola.jpg" % basename)
+    cv2.imwrite(fname, apply_threshold(img, th))
+
+    # Applying local Niblack method
+    start = default_timer()
+    th = niblack_threshold(img)
+    stop = default_timer()
+    print('========Local Niblack==========')
+    print('Execution time: {0}'.format(stop - start))
+    print('====================================')
+    fname = join(odir, "%s_niblack.jpg" % basename)
+    cv2.imwrite(fname, apply_threshold(img, th))
+
+    # Applying local Wolf method
+    start = default_timer()
+    th = wolf_threshold(img)
+    stop = default_timer()
+    print('========Local Wolf==========')
+    print('Execution time: {0}'.format(stop - start))
+    print('====================================')
+    fname = join(odir, "%s_wolf.jpg" % basename)
+    cv2.imwrite(fname, apply_threshold(img, th))
+
+    # Applying local NICK method
+    start = default_timer()
+    th = nick_threshold(img)
+    stop = default_timer()
+    print('========Local NICK==========')
+    print('Execution time: {0}'.format(stop - start))
+    print('====================================')
+    fname = join(odir, "%s_nick.jpg" % basename)
+    cv2.imwrite(fname, apply_threshold(img, th))
+
+    # Applying local mean method
+    start = default_timer()
+    th = lmean_threshold(img)
+    stop = default_timer()
+    print('========Local mean==========')
+    print('Execution time: {0}'.format(stop - start))
+    print('====================================')
+    fname = join(odir, "%s_localMean.jpg" % basename)
+    cv2.imwrite(fname, apply_threshold(img, th))
+
+    # Applying local Bradley-Roth method
+    start = default_timer()
+    th = bradley_roth_threshold(img)
+    stop = default_timer()
+    print('========Local Bradley-Roth==========')
+    print('Execution time: {0}'.format(stop - start))
+    print('====================================')
+    fname = join(odir, "%s_bradleyRoth.jpg" % basename)
+    cv2.imwrite(fname, apply_threshold(img, th))
+
+    # Applying local Bernsen method
+    start = default_timer()
+    th = bernsen_threshold(img)
+    stop = default_timer()
+    print('========Local Bernsen==========')
+    print('Execution time: {0}'.format(stop - start))
+    print('====================================')
+    fname = join(odir, "%s_bernsen.jpg" % basename)
+    cv2.imwrite(fname, apply_threshold(img, th))
+
+    # Applying local contrast method
+    start = default_timer()
+    th = contrast_threshold(img)
+    stop = default_timer()
+    print('========Local contrast==========')
+    print('Execution time: {0}'.format(stop - start))
+    print('====================================')
+    fname = join(odir, "%s_localContrast.jpg" % basename)
+    cv2.imwrite(fname, apply_threshold(img, th))
+
+    # Applying local Singh method
+    start = default_timer()
+    th = singh_threshold(img)
+    stop = default_timer()
+    print('========Local Singh==========')
+    print('Execution time: {0}'.format(stop - start))
+    print('====================================')
+    fname = join(odir, "%s_singh.jpg" % basename)
+    cv2.imwrite(fname, apply_threshold(img, th))
+
+    # Applying local Feng method
+    start = default_timer()
+    th = feng_threshold(img)
+    stop = default_timer()
+    print('========Local Feng==========')
+    print('Execution time: {0}'.format(stop - start))
+    print('====================================')
+    fname = join(odir, "%s_feng.jpg" % basename)
+    cv2.imwrite(fname, apply_threshold(img, th))

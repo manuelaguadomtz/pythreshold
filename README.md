@@ -20,6 +20,10 @@
     img = ascent()
     test_thresholds(img)
 
+Or just type in a terminal:
+
+    pythreshold -i /path/to/inpu/image -o /output/dir/for/thresholded/images
+
 ## Included Algorithms
 
 * Global thresholding
