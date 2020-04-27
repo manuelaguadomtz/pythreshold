@@ -11,7 +11,7 @@ setup(
     name='pythreshold',
 
     # Package version
-    version='0.2.2',
+    version='0.3.1',
 
     # Included packages
     packages=find_packages(),
