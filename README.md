@@ -46,6 +46,11 @@ Or just type in a terminal:
           Graphics, and Image Processing 29, no. 3 (1985): 273–285.
         * Pun, T. "A New Method for Grey-Level Picture Thresholding Using the
           Entropy of the Histogram,"" Signal Processing 2, no. 3 (1980): 223–237.
+* Global thresholding (Multi-threshold)
+    * Entropy thresholding
+        * Kapur, J. N., P. K. Sahoo, and A. K. C.Wong. "A New Method for Gray-Level
+          Picture Thresholding Using the Entropy of the Histogram,"" Computer Vision,
+          Graphics, and Image Processing 29, no. 3 (1985): 273–285.
 * Local thresholding
     * Bernsen, J (1986), "Dynamic Thresholding of Grey-Level Images",
       Proc. of the 8th Int. Conf. on Pattern Recognition
