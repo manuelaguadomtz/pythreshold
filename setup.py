@@ -35,7 +35,7 @@ setup(
         'scipy',
         'scikit-image',
         'matplotlib',
-        'opencv-python'
+        # 'opencv-python'
     ],
 
     # Package description

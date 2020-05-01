@@ -13,3 +13,6 @@ dist/
 # Ignoring build directories
 build/
 pythreshold.egg-info/
+
+# Ignoring resources directory
+resources/
