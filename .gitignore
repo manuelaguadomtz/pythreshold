@@ -16,3 +16,6 @@ pythreshold.egg-info/
 
 # Ignoring resources directory
 resources/
+
+# Ignoring TODO file
+TODO
