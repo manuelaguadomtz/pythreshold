@@ -22,7 +22,7 @@
 
 Or just type in a terminal:
 
-    pythreshold -i /path/to/inpu/image -o /output/dir/for/thresholded/images
+    pythreshold -i /path/to/input/image -o /output/directory/for/thresholded/images
 
 ## Included Algorithms
 
