@@ -71,8 +71,8 @@ def _get_thresholds(hist, c_hist, nthrs):
 
     @param hist: The normalized histogram of the image
     @type hist: ndarray
-    @param hist: The normalized histogram of the image
-    @type hist: ndarray
+    @param c_hist: The cummuative normalized histogram of the image
+    @type c_hist: ndarray
     @param nthrs: The number of thresholds
     @type nthrs: int
     """

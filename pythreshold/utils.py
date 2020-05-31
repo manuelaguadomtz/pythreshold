@@ -12,6 +12,7 @@ from scipy.misc import face
 # Importing global thresholding algorithms
 from .global_th import (
     otsu_threshold,
+    otsu_multithreshold,
     p_tile_threshold,
     two_peaks_threshold,
     min_err_threshold
@@ -116,6 +117,19 @@ def test_thresholds_plt(img=None):
     # Plotting results
     plt.figure('Otsu method')
     plt.imshow(apply_threshold(img, th), cmap='gray')
+
+    # Applying Otsu multi-threshold method
+    start = default_timer()
+    th = otsu_multithreshold(img, nthrs=2)
+    stop = default_timer()
+    print('========Otsu multi-threshold==========')
+    print('Thresholds: {0}'.format(th))
+    print('Execution time: {0}'.format(stop - start))
+    print('')
+
+    # Plotting results
+    plt.figure('Otsu multi-threshold method')
+    plt.imshow(apply_multithreshold(img, th), cmap='gray')
 
     # Applying p_tile method
     start = default_timer()
@@ -349,6 +363,17 @@ def test_thresholds(img, odir, basename):
     print('')
     fname = join(odir, "%s_Otsu.jpg" % basename)
     cv2.imwrite(fname, apply_threshold(img, th))
+
+    # Applying Otsu multithreshold method
+    start = default_timer()
+    th = otsu_multithreshold(img, nthrs=2)
+    stop = default_timer()
+    print('========Otsu Multithreshold==========')
+    print('Threshold: {0}'.format(th))
+    print('Execution time: {0}'.format(stop - start))
+    print('')
+    fname = join(odir, "%s_OtsuMultiTh.jpg" % basename)
+    cv2.imwrite(fname, apply_multithreshold(img, th))
 
     # Applying p_tile method
     start = default_timer()
