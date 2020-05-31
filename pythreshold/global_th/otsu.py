@@ -47,7 +47,7 @@ def otsu_threshold(image=None, hist=None):
     return np.argmax(var_between_classes)
 
 
-def _get_variance(hist, c_hist, cdf, t_mean, thresholds):
+def _get_variance(hist, c_hist, cdf, thresholds):
     """Get the total entropy of regions for a given set of thresholds"""
 
     variance = 0
@@ -66,7 +66,7 @@ def _get_variance(hist, c_hist, cdf, t_mean, thresholds):
         # Region mean
         r_mean = r_cdf / weight if weight != 0 else 0
 
-        variance += weight * (r_mean - t_mean) ** 2
+        variance += weight * r_mean ** 2
 
     return variance
 
@@ -89,9 +89,6 @@ def _get_thresholds(hist, c_hist, cdf, nthrs):
     max_var = 0
     opt_thresholds = None
 
-    # Image mean
-    t_mean = cdf[-1] / c_hist[-1]
-
     # Extending histograms for convenience
     c_hist = np.append(c_hist, [0])
     cdf = np.append(cdf, [0])
@@ -103,7 +100,7 @@ def _get_thresholds(hist, c_hist, cdf, nthrs):
         e_thresholds.extend([len(hist) - 1])
 
         # Computing variance for the current combination of thresholds
-        regions_var = _get_variance(hist, c_hist, cdf, t_mean, e_thresholds)
+        regions_var = _get_variance(hist, c_hist, cdf, e_thresholds)
 
         if regions_var > max_var:
             max_var = regions_var
@@ -119,6 +116,9 @@ def otsu_multithreshold(image=None, hist=None, nthrs=2):
     Otsu, Nobuyuki. "A threshold selection method from gray-level
     histograms." IEEE transactions on systems, man, and cybernetics
     9.1 (1979): 62-66.
+
+    Liao, Ping-Sung, Tse-Sheng Chen, and Pau-Choo Chung. "A fast algorithm
+    for multilevel thresholding." J. Inf. Sci. Eng. 17.5 (2001): 713-727.
 
     @param image: The input image
     @type image: ndarray
