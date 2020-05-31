@@ -47,6 +47,8 @@ Or just type in a terminal:
         * Pun, T. "A New Method for Grey-Level Picture Thresholding Using the
           Entropy of the Histogram,"" Signal Processing 2, no. 3 (1980): 223–237.
 * Global thresholding (Multi-threshold)
+    * Liao, Ping-Sung, Tse-Sheng Chen, and Pau-Choo Chung. "A fast algorithm
+      for multilevel thresholding." J. Inf. Sci. Eng. 17.5 (2001): 713-727.
     * Entropy thresholding
         * Kapur, J. N., P. K. Sahoo, and A. K. C.Wong. "A New Method for Gray-Level
           Picture Thresholding Using the Entropy of the Histogram,"" Computer Vision,
