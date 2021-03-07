@@ -10,12 +10,11 @@ __author__ = u'BSc. Manuel Aguado Martínez'
 
 def bernsen_threshold(img, w_size=15, c_thr=30):
     """Runs the Bernsen thresholding algorithm
-    
+
     Reference:
     Bernsen, J (1986), "Dynamic Thresholding of Grey-Level Images",
     Proc. of the 8th Int. Conf. on Pattern Recognition
 
-    
     @param img: The input image. Must be a gray scale image
     @type img: ndarray
     @param w_size: The size of the local window to compute
@@ -24,7 +23,7 @@ def bernsen_threshold(img, w_size=15, c_thr=30):
     @param c_thr: The threshold contrast to determine an
         homogeneous region
     @type c_thr: int
-    
+
     @return: The estimated local threshold for each pixel
     @rtype: ndarray
     """

@@ -8,7 +8,7 @@ __author__ = u'BSc. Manuel Aguado Martínez'
 
 def niblack_threshold(img, w_size=15, k=-0.2):
     """ Runs the niblack's thresholding algorithm.
-    
+
     Reference:
     Niblack, W.: ‘An introduction to digital image
     processing’ (Prentice- Hall, Englewood Cliffs, NJ, 1986), pp. 115–116
@@ -20,11 +20,11 @@ def niblack_threshold(img, w_size=15, k=-0.2):
     @type img: ndarray
     @param w_size: The size of the local window to compute
         each pixel threshold. Should be and odd value
-    @type w_size: int 
+    @type w_size: int
     @param k: Controls the value of the local threshold. Should lie in the
         interval [-0.2, -0.1]
     @type k: float
-    
+
     @return: The estimated local threshold for each pixel
     @rtype: ndarray
     """

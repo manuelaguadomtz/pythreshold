@@ -113,7 +113,7 @@ def feng_threshold(img, w_size1=15, w_size2=30,
     alpha2 = k1 * n_sqr_std
     alpha3 = k2 * n_sqr_std
 
-    thresholds = ((1 - alpha1) * means + alpha2 * n_stds
-                  * (means - mins) + alpha3 * mins)
+    thresholds = ((1 - alpha1) * means + alpha2 * n_stds *
+                  (means - mins) + alpha3 * mins)
 
     return thresholds

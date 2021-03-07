@@ -9,7 +9,7 @@ __author__ = u'BSc. Manuel Aguado Martínez'
 def lmean_threshold(img, w_size=15):
     """ Runs the local mean thresholding algorithm.
 
-    Reference: 
+    Reference:
     Parker, J. R. (2010). Algorithms for image processing and
     computer vision. John Wiley & Sons.
 
@@ -19,7 +19,7 @@ def lmean_threshold(img, w_size=15):
     @type img: ndarray
     @param w_size: The size of the local window to compute
         each pixel threshold. Should be and odd value
-    @type w_size: int 
+    @type w_size: int
 
     @return: The estimated local threshold for each pixel
     @rtype: ndarray

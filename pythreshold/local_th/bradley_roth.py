@@ -17,9 +17,9 @@ def bradley_roth_threshold(img, w_size=15, w=0.15):
     @type img: ndarray
     @param w_size: The size of the local window to compute
         each pixel threshold. Should be and odd value
-    @type w_size: int 
+    @type w_size: int
     @param w: Used to verify is each pixel is 'w' percent lower than
-        the local average. It should be a normalized value in the 
+        the local average. It should be a normalized value in the
         range [0, 1].
     @type w: float
 

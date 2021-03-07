@@ -21,10 +21,10 @@ def wolf_threshold(img, w_size=15, k=0.5):
     @type img: ndarray
     @param w_size: The size of the local window to compute
         each pixel threshold. Should be and odd value
-    @type w_size: int 
+    @type w_size: int
     @param k: Controls the value of the local threshold.
     @type k: float
-    
+
     @return: The estimated local threshold for each pixel
     @rtype: ndarray
     """

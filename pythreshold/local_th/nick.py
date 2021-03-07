@@ -8,7 +8,7 @@ __author__ = u'BSc. Manuel Aguado Martínez'
 
 def nick_threshold(img, w_size=15, k=-0.2):
     """ Runs the NICK thresholding algorithm.
-    
+
     Reference:
     Khurshid, K., Siddiqi, I., Faure, C., & Vincent, N.
     (2009, January). Comparison of Niblack inspired Binarization methods for
@@ -22,11 +22,11 @@ def nick_threshold(img, w_size=15, k=-0.2):
     @type img: ndarray
     @param w_size: The size of the local window to compute
         each pixel threshold. Should be and odd value
-    @type w_size: int 
+    @type w_size: int
     @param k: Controls the value of the local threshold. Should lie in the
         interval [-0.2, -0.1]
     @type k: float
-    
+
     @return: The estimated local threshold for each pixel
     @rtype: ndarray
     """

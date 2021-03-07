@@ -8,7 +8,7 @@ __author__ = u'BSc. Manuel Aguado Martínez'
 
 def sauvola_threshold(img, w_size=15, k=0.35):
     """ Runs the sauvola's thresholding algorithm.
-    
+
     Reference:
     Sauvola, J., Seppanen, T., Haapakoski, S., and Pietikainen, M.:
     ‘Adaptive document thresholding’. Proc. 4th Int. Conf. on Document
@@ -21,11 +21,11 @@ def sauvola_threshold(img, w_size=15, k=0.35):
     @type img: ndarray
     @param w_size: The size of the local window to compute
         each pixel threshold. Should be and odd value
-    @type w_size: int 
+    @type w_size: int
     @param k: Controls the value of the local threshold. It lies in the
         interval [0.2, 0.5]
     @type k: float
-    
+
     @return: The estimated local threshold for each pixel
     @rtype: ndarray
     """
