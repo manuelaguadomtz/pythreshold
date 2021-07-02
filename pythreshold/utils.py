@@ -154,7 +154,7 @@ def test_thresholds_plt(img=None):
     print('')
 
     # Plotting results
-    plt.figure('Tow peaks method')
+    plt.figure('Two peaks method')
     plt.imshow(apply_threshold(img, th), cmap='gray')
 
     # Applying minimum error method
