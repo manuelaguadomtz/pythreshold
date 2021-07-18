@@ -122,7 +122,7 @@ def threshold_3d_bimodal_moments(stack_path):
 
 if __name__ == "__main__":
     
-    stack_path =  r"C:\Users\pedro\Desktop\Personal\02. PhD\M56_sample2_v1_4_val1_cont_filt_8bit"
+    stack_path =  "\path.."
     
     threshold, dict_val = threshold_3d_bimodal_moments(stack_path)
     

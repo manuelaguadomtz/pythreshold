@@ -295,23 +295,15 @@ def moments_tsai_example():
             
             
     
-    return img, th1, th2, abs(z0), abs(z1), abs(z2)
+    return th1, th2, dict_val
 
 
 if __name__ == "__main__":
     
-    stack_path =  r"C:\Users\zz19101\OneDrive - University of Bristol\Desktop\PhD\10. Exp - Research\04. DL_FeatRecog\10. Paper\01. TrainSet_4\00. Validation Scan\01. Sample_2_V1\M56_sample2_v1_4_val1_cont_filt_8bit"
+    stack_path =  "\path..."
     
-    img_array, histogram, th1, th2, dict_val = threshold_3d_multi_moments(stack_path)
+    th1, th2, dict_val = threshold_3d_multi_moments(stack_path)
     
-    #a1 = dict_val['a1']
-    #a2 = dict_val['a2']
-    #a3 = dict_val['a3']
-    #p = dict_val['p']
     
-    #img, th1, th2, z0, z1, z2 = moments_tsai_example()
-    
-    #a = (a1 - (a2 + a3)**(1/2))**(1/3)
-    # The histogram calculation has been double-checked with Fiji
         
         
