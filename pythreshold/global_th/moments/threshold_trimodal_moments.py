@@ -13,17 +13,41 @@ import math
 import gc
 import cmath
 
-def threshold_3d_multi_moments(stack_path):
-    """ This function calculates the threshold of a stack based on keeping the
-    moments of the image before and after binarization.
-    See: Moment-Preserving Thresholding: A New Approach (Tsai)
+def threshold_trimodal_moments(stack_path):
+    """
+     
+    This function calculates the threshold of a stack based on keeping the
+    moments of the image before and after binarization. 
+    IMPORTANT: It provides the threshold for a trimodal histogram (three phases in the histogram)
+    See: 'Moment-Preserving Thresholding: A New Approach (Tsai)'
+    This code has been inspired by the code written by G. Landini for the Fiji Plugin
+    'https://github.com/fiji/Auto_Threshold/blob/master/src/main/java/fiji/threshold/Auto_Threshold.java'
+
+    Parameters
+    ----------
+    stack_path : str
+        Folder path where the set of 2D images (making up a 3D image like the
+        ones resulting from a CT Scan) are stored. Images can be whatever usual format: PNG, TIFF, JPEG...
+
+    Returns
+    -------
+    
+    th1 : integer
+        first phase covers the greyscale range [0-th1]
+        
+    th2 : integer
+        second phase covers the greyscale range [th1+1 - th2]
+        third phase are the greyvalues [th2+1 - 255]
+        
+    dict_val : dictionary
+        threshold resulting from the application of the moments conservation principle.
     
     """
     gc.collect()
     slices_list = sorted(os.listdir(stack_path)) # 
     
     #Define the histogram
-    bins_hist = list(range(0,257)) # Queremos llegar a tener 256 "papeleras", por eso tenemos que poner 257, para que haga de 0 hasta 256
+    
     histogram = np.zeros((256,4))  # We generate the counts for each grey value, 3rd column probabilities and 4th column cumulative sum
     histogram[:,0] = np.arange(256)  # La primera columna contiene los valores de intensidad de los pixels
     
@@ -33,8 +57,8 @@ def threshold_3d_multi_moments(stack_path):
         
         with Image.open(slice_path) as img:
             img = img.convert('L')
-            img_array = np.array(Image.open(slice_path).convert('L'))
-        hist_i = np.histogram(img_array, bins=bins_hist)
+            img_array = np.array(img)
+        hist_i = np.histogram(img_array, bins=256)
         counts = hist_i[0]
         histogram[:,1] = np.add(histogram[:,1], counts)
    
@@ -302,7 +326,7 @@ if __name__ == "__main__":
     
     stack_path =  "\path..."
     
-    th1, th2, dict_val = threshold_3d_multi_moments(stack_path)
+    th1, th2, dict_val = threshold_trimodal_moments(stack_path)
     
     
         

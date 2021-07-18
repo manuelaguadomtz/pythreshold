@@ -14,11 +14,12 @@ import math
 import gc
 
 
-def threshold_3d_bimodal_moments(stack_path):
+def threshold_bimodal_moments(stack_path):
     """
      
     This function calculates the threshold of a stack based on keeping the
     moments of the image before and after binarization.
+    IMPORTANT: It provides the threshold for a bimodal histogram (foreground and background)
     See: 'Moment-Preserving Thresholding: A New Approach (Tsai)'
     This code has been inspired by the code written by G. Landini for the Fiji Plugin
     'https://github.com/fiji/Auto_Threshold/blob/master/src/main/java/fiji/threshold/Auto_Threshold.java'
