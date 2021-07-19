@@ -125,7 +125,7 @@ if __name__ == "__main__":
     
     stack_path =  "\path.."
     
-    threshold, dict_val = threshold_3d_bimodal_moments(stack_path)
+    threshold, dict_val = threshold_bimodal_moments(stack_path)
     
     # The histogram calculation has been double-checked with Fiji
         
