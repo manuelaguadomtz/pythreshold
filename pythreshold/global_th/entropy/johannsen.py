@@ -20,7 +20,7 @@ def johannsen_threshold(image):
     @return: The estimated threshold
     @rtype: int
     """
-    hist, _ = np.histogram(image, bins=range(256), density=True)
+    hist, _ = np.histogram(image, bins=range(257), density=True)
 
     # Knowing the number of leading zeros
     l_zeros = 0

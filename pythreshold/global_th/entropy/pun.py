@@ -20,7 +20,7 @@ def pun_threshold(image):
     @rtype: int
     """
     # Calculating histogram
-    hist, _ = np.histogram(image, bins=range(256), density=True)
+    hist, _ = np.histogram(image, bins=range(257), density=True)
 
     # Calculating histogram cumulative sum
     hcs = np.cumsum(hist)

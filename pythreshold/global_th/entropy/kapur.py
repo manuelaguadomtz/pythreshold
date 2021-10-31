@@ -23,7 +23,7 @@ def kapur_threshold(image):
     @return: The estimated threshold
     @rtype: int
     """
-    hist, _ = np.histogram(image, bins=range(256), density=True)
+    hist, _ = np.histogram(image, bins=range(257), density=True)
     c_hist = hist.cumsum()
     c_hist_i = 1.0 - c_hist
 
@@ -119,7 +119,7 @@ def kapur_multithreshold(image, nthrs):
     @rtype: int
     """
     # Histogran
-    hist, _ = np.histogram(image, bins=range(256), density=True)
+    hist, _ = np.histogram(image, bins=range(257), density=True)
 
     # Cumulative histogram
     c_hist = hist.cumsum()

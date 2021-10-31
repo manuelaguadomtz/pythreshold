@@ -34,7 +34,7 @@ def two_peaks_threshold(image, smooth_hist=True, sigma=5):
         minimum histogram value
     @rtype: int
     """
-    hist = np.histogram(image, bins=range(256))[0].astype(np.float)
+    hist = np.histogram(image, bins=range(257))[0].astype(np.float)
 
     if smooth_hist:
         hist = gaussian_filter(hist, sigma=sigma)
