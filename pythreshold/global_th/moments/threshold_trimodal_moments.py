@@ -106,7 +106,7 @@ def threshold_trimodal_moments(stack_path):
     s = 1
     p = 1
     q = 1
-    a = (a1 - cmath.sqrt(a2 + a3))**1/3 
+    a = (a1 - cmath.sqrt(a2 + a3))**(1/3) 
    
     #s = cmath.sqrt(p)
     
